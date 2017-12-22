@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="searchForms" ng-cloak>
+<html lang="en" ng-app="formsBuilder" ng-cloak>
   <head>
     <meta charset="UTF-8">
 
@@ -24,12 +24,18 @@
 
     <script src="js/app.js"></script>
     <script src="js/controllers/displayForm.js"></script>
-    <script src="js/controllers/formDetail.js"></script>
-    <script src="js/controllers/search.js"></script>    
+    <script src="js/controllers/buildForm.js"></script>
+    <script src="js/controllers/uploadForm.js"></script>
+    <script src="js/controllers/registration.js"></script>    
+    <script src="js/controllers/profile.js"></script>
+    <script src="js/controllers/success.js"></script>
+    <script src="js/controllers/security.js"></script>
     <script src="js/controllers/nav.js"></script>    
     <script src="js/factory/dataService.js"></script>
-    <script src="js/directives/searchForms.js"></script>
-    
+    <script src="js/factory/listService.js"></script>
+    <script src="js/factory/markerService.js"></script>
+    <script src="js/directives/formsBuilder.js"></script>
+    <script src="js/filters/mapAlignment.js"></script>
 
   </head>
   <body oncontextmenu="return false;">

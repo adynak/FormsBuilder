@@ -1,4 +1,4 @@
-searchForms.factory("ListServices", ['$http', '$q', '$rootScope', 'Data',
+formsBuilder.factory("ListServices", ['$http', '$q', '$rootScope', 'Data',
     function($http, $q, $rootScope, Data) {
 
         var findIndexInData = function(data, property, value){

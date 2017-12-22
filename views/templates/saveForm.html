@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{prompts.form }} {{ formDefinition.formName }}</h3>
+</div>
+
+<div class="modal-body">
+	{{prompts.contextMessageText}}
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary" 
+    	    type="button" 
+			ng-disabled="checkFormName();"
+    	    ng-click="saveFormDefinition()">{{prompts.saveChanges}}</button>
+
+    <button class="btn btn-warning" 
+    	    type="button" 
+    	    ng-click="discardChanges()">{{prompts.discardChanges}}</button>
+
+    <button class="btn btn-danger" 
+    	    type="button" 
+    	    ng-click="resetAllFields()">{{prompts.resetAll}}</button>    	    
+</div>

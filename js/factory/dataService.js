@@ -1,11 +1,10 @@
-searchForms.factory("Data", ['$http', '$q', '$rootScope',
+formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
     function($http, $q, $rootScope) {
 
         var factoryVariables = {
             securityInfo : {
                 schema: null,
                 dbPass: null,
-                dpPort: null,
                 stop: true
             },
             fileAttributes: {
@@ -13,22 +12,6 @@ searchForms.factory("Data", ['$http', '$q', '$rootScope',
                 blob: null
             }
         };
-
-        var setSearchMatches = function(searchResults){
-            factoryVariables.searchRessults = searchResults;
-        }
-
-        var getSearchMatches = function(){
-            return factoryVariables.searchRessults;
-        }
-
-        var setSearchPattern = function(pattern){
-            factoryVariables.searchPattern = pattern;
-        }
-
-        var getSearchPattern = function(){
-            return factoryVariables.searchPattern;
-        }
 
         var setFileAttributes = function(attrs){
             // {name: name, blob: blob ; }
@@ -82,46 +65,90 @@ searchForms.factory("Data", ['$http', '$q', '$rootScope',
         var setSecurityInfo = function(securityInfo){
             localStorage.setItem('catsndogs', securityInfo.schema);
             localStorage.setItem('teainchina', securityInfo.dbPass);
-            localStorage.setItem('countingbluecars', securityInfo.dbPass);
             factoryVariables.securityInfo = securityInfo;
         }
 
         var getSecurityInfo = function(){
-            if (factoryVariables.securityInfo.schema == null || 
-                factoryVariables.securityInfo.dbPass == null ||
-                factoryVariables.securityInfo.dpPort == null){
+            if (factoryVariables.securityInfo.schema == null || factoryVariables.securityInfo.dbPass == null){
                 factoryVariables.securityInfo.schema = localStorage.getItem('catsndogs');
                 factoryVariables.securityInfo.dbPass = localStorage.getItem('teainchina');
-                factoryVariables.securityInfo.dbPort = localStorage.getItem('countingbluecars');
-                if (factoryVariables.securityInfo.schema !== null || 
-                    factoryVariables.securityInfo.dbPass !== null ||
-                    factoryVariables.securityInfo.dbPort !== null){
+                if (factoryVariables.securityInfo.schema !== null || factoryVariables.securityInfo.dbPass !== null){
                     factoryVariables.securityInfo.stop = false;
                 }
             }
             return factoryVariables.securityInfo;
         }
 
-        var searchFormsFiles = function(member){
+        var validateCredentials = function(member){
             var qObject = $q.defer();
             var params = {
-                task: 'search',
+                email: member.email,
+                password: member.password,
+                task: 'validate',
                 securityInfo: getSecurityInfo()
             };
             $http({
                 method: 'POST',
-                url: 'resources/dataServices/searchForms.php',
+                url: 'resources/dataServices/formsBuilder.php',
                 data: params,
-                // headers: {
-                //     'Content-Type': 'application/x-www-form-urlencoded'
-                // },
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
             }).then(function(success) {
                 qObject.resolve(success.data);
             }, function(err) {
                 console.log(err);
             });
             return qObject.promise;            
-        };
+        }
+
+        var registerMember = function(member) {
+            // https://script.google.com/macros/d/MNYmhNDROwSuCBulBjpCOBQxbFS9WIK2d/edit?uiv=2&mid=ACjPJvEKyT7zYT3fN-Bh1kBFyqiw_j-NG0SCSo6rc8dz7_7-9NTrsj5jSdurrMX2vu4lYc7bcXFNQFhfPeq_OqzPSlpd9Gs2g6YQLT_tIItlrJTTIi-nhs6yiSsIL-QsJeoPX6K2BBxTuGc
+            var qObject = $q.defer();
+            delete member.confirmpassword;
+            member.onlineid = member.email.substring(0, member.email.lastIndexOf("@"));
+            member.webApp = txtNavigation.brandName;
+            member.replyTo = txtNavigation.replyTo;
+            member.appDomain = txtNavigation.appDomain;
+            var params = "&" + $.param(member);
+            var webApp = 'https://script.google.com/macros/s/AKfycbwL0BWFFP7Pz-qsjqpuLUCEtjlN2qSvxehkmLXzued3xhron0lS/exec';
+            $http({
+                method: 'POST',
+                url: webApp,
+                data: params,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+            }).then(function(success) {
+                qObject.resolve(success.data);
+            }, function(err) {
+                console.log(err);
+            });
+            return qObject.promise;            
+        }
+
+        var updateMemberInfo = function(member){
+            var qObject = $q.defer();
+            var params = {
+                userInfo: member,
+                task: 'updateuser',
+                securityInfo: getSecurityInfo()
+            };
+            $http({
+                method: 'POST',
+                url: 'resources/dataServices/formsBuilder.php',
+                data: params,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+            }).then(function(success) {
+                qObject.resolve(success.data);
+
+            }, function(err) {
+                console.log(err);
+            });
+            return qObject.promise;
+        }
 
         var logout = function(member){
             var qObject = $q.defer();
@@ -131,7 +158,7 @@ searchForms.factory("Data", ['$http', '$q', '$rootScope',
             };
             $http({
                 method: 'POST',
-                url: 'resources/dataServices/searchForms.php',
+                url: 'resources/dataServices/formsBuilder.php',
                 data: params,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -152,7 +179,7 @@ searchForms.factory("Data", ['$http', '$q', '$rootScope',
             };
             $http({
                 method: 'POST',
-                url: 'resources/dataServices/searchForms.php',
+                url: 'resources/dataServices/formsBuilder.php',
                 data: params,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -165,12 +192,56 @@ searchForms.factory("Data", ['$http', '$q', '$rootScope',
             return qObject.promise;
         }
 
+        var getWipForm = function(pdfName){
+            var qObject = $q.defer();
+            var params = {
+                formName: pdfName.name,
+                securityInfo: getSecurityInfo(),
+                action: 'read'
+            };
+            $http({
+                method: 'POST',
+                url: 'resources/dataServices/wipForms.php',
+                data: params,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }                
+            }).then(function(success) {
+                qObject.resolve(success.data);
+            }, function(err) {
+                console.log(err);
+            });
+            return qObject.promise;
+        };
+
+        var setWipForm = function(pdfName,jsonForm){
+            var qObject = $q.defer();
+            var params = {
+                formName: pdfName.name,
+                securityInfo: getSecurityInfo(),
+                jsonForm: jsonForm,
+                action: 'write'
+            };
+            $http({
+                method: 'POST',
+                url: 'resources/dataServices/wipForms.php',
+                data: params,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }                
+            }).then(function(success) {
+                qObject.resolve(success.data);
+            }, function(err) {
+                console.log(err);
+            });
+            return qObject.promise;
+        };
+
+
         return {
-            searchFormsFiles: searchFormsFiles,
-            setSearchMatches: setSearchMatches,
-            getSearchMatches: getSearchMatches,
-            setSearchPattern: setSearchPattern,
-            getSearchPattern: getSearchPattern,
+            validateCredentials: validateCredentials,
+            registerMember: registerMember,
+            updateMemberInfo: updateMemberInfo,
             logout: logout,
             getSession: getSession,
             setCurrentMember: setCurrentMember,
@@ -186,7 +257,9 @@ searchForms.factory("Data", ['$http', '$q', '$rootScope',
             getFormDefinition: getFormDefinition,
             setFormDefinition: setFormDefinition,
             setSecurityInfo: setSecurityInfo,
-            getSecurityInfo: getSecurityInfo
+            getSecurityInfo: getSecurityInfo,
+            getWipForm: getWipForm,
+            setWipForm: setWipForm
         };
     }
 ]);

@@ -1,0 +1,73 @@
+<div>
+	<div class="modal-header">
+		<h4 class="alert alert-info">
+			Form: {{ formDefinition.formName }}
+			<br>
+			Field: {{fieldNumber}}
+		</h4>
+	</div>
+          
+
+	<div class="modal-body">
+		<form class="form-horizontal">
+
+			<div ng-if="formDefinition.showFormName == true" class="control-group">
+				<label class="control-label" for="formName">{{prompts.formName}}:</label>
+				<div class="controls">
+					<input autofocus
+						   class="form-control" 
+	                	   type="text" 
+	                 	   name="formName" 
+	                 	   placeholder="{{prompts.placeholderFormName}}" 
+	                 	   ng-model="formDefinition.formName" 
+	                       ng-required="true">
+				</div>
+			</div>			
+
+			<div class="control-group">
+				<label class="control-label" for="fieldName">{{prompts.fieldName}}:</label>
+				<div class="controls">
+					<input autofocus
+						   class="form-control" 
+	                	   type="text" 
+	                 	   name="fieldName" 
+	                 	   placeholder="{{prompts.placeholderFieldName}}" 
+	                 	   ng-model="fieldDefinition.name" 
+	                       ng-required="true">
+				</div>
+			</div>
+      
+			<div class="control-group">
+				<label class="control-label" for="fieldWidth">{{prompts.fieldWidth}}</label>
+				<div class="controls">
+					<select 
+						ng-model="fieldDefinition.width"
+						id="fieldWidth"
+						ng-options="width.id as width.name for width in selectWidth"
+						ng-change="changing()">
+						<option value="">{{ prompts.placeholderFieldWidth }}</option>
+
+					</select>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label" for="fieldAlignment">{{prompts.alignment}}</label>
+				<div class="controls">
+					<select 
+						ng-model="fieldDefinition.alignment"
+						id="fiendAlignment"
+                  		ng-options="alignments.id as alignments.name for alignments in prompts.alignments">
+						<option value="">{{ prompts.placeholderFieldAlignment }}</option>
+
+					</select>
+				</div>
+			</div>
+
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" ng-disabled="checkInputs();" ng-click="ok()">{{prompts.OK}}</button>
+		<button class="btn btn-warning" ng-click="cancel()">{{prompts.cancel}}</button>
+	</div>
+</div>

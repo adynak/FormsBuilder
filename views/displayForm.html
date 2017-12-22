@@ -1,37 +1,23 @@
 <div class="row">
-  <div class="col-md-10 col-md-offset-1">
-    <h4 class="alert alert-info">
-      <div style="text-align: left;">
-        <ng-pluralize count="resultsCount"
-          when="{'0':     '{{prompts.pluralsFields[0].tag}}',
-                 '1':     '{} {{prompts.pluralsFields[1].tag}}',
-                 'other': '{} {{prompts.pluralsFields[2].tag}}'
-                }">
-        </ng-pluralize>{{ searchPattern }}
-      </div>
-
-      <div class="col-sm-3 col-md-3 pull-right has-feedback">
-
-          <div class="input-group-sm moveUp">
-            <input type="text" 
-                   class="form-control" 
-                   ng-change="searchGrid()" 
-                   placeholder="{{prompts.searchEmptyText}}"
-                   ng-model="searchText" />
-            <i class="form-control-feedback moveUp moveLeft glyphicon glyphicon-search"></i>                   
-          </div>
-      </div>      
+  <div class="col-md-8 col-md-offset-2">
+    <h4 class="alert alert-info">Form: {{ formName  }}
+      <div style="text-align: right;   margin-top : -19px;">
+      <ng-pluralize count="resultsCount"
+        when="{'0':     '{{prompts.pluralsFields[0].tag}}',
+               '1':     '{} {{prompts.pluralsFields[1].tag}}',
+               'other': '{} {{prompts.pluralsFields[2].tag}}'
+              }">
+      </ng-pluralize>
+    </div>
 
     </h4>
     <br>
 
     <div>
-      <div class="grid"
-           ui-grid="gridOptions"
-           ui-grid-selection>
-      </div>
+      <div class="grid" 
+           ui-grid-edit
+           ui-grid="gridOptions" ></div>
     </div>
-        
     <br><br>
     <button class="btn btn-lg btn-primary btn-block" 
             type="button" ng-click="btnDone();">{{prompts.btnCancel}}

@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <form name="formsBuilder" class="form-signin" novalidate>
+      <h4 class="alert alert-info">{{ prompts.pageTitle }}</h4>
+
+      <p style="background-color: white;">
+        <br>
+        <br>
+        &nbsp;&nbsp;This page will need to format the form definition and save it to the server
+        <br>
+        <br>
+        <br>
+      </p>
+      
+        <pre>{{prompts.jsonFormData}}</pre>
+      <!--   <div class="jsonFormData">
+          {{prompts.jsonFormData}}
+        </div>
+ -->
+      <button class="btn btn-lg btn-primary btn-block" 
+              type="button" 
+              onclick="window.history.go(-1);">{{prompts.btnCancel}}
+      </button>
+
+    </form>
+  </div>
+</div>

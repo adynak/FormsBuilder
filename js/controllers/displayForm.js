@@ -1,115 +1,153 @@
-searchForms.controller('DisplayFormController', ['$scope', '$http', '$location', 'Data', '$rootScope', '$routeParams', 'toaster', '$filter', '$uibModal',
-    function($scope, $http, $location, Data, $rootScope, $routeParams, toaster, $filter, $uibModal) {
+formsBuilder.controller('DisplayFormController', ['$scope', '$http', '$location', 'Data', '$rootScope', '$routeParams', 'toaster', 'ListServices',
+    function($scope, $http, $location, Data, $rootScope, $routeParams, toaster, ListServices) {
 
         $scope.prompts = txtReviewForm;
-        $scope.modalShown = false;
+
+        var debug = false;
+
+        var memberInfo = {};
+        memberInfo.id = Data.getCurrentMember().id;
+
+        $scope.deleteRow = function(row){
+            var index = $scope.gridOptions.data.indexOf(row.entity);
+            $scope.gridOptions.data.splice(index,1);
+            ListServices.renumberFields($scope.gridOptions.data);
+        };
 
         $scope.btnDone = function(){
             window.history.go(-1);
         };
 
+        var formDefinition = Data.getFormDefinition();
 
-        $scope.myAppScopeProvider = {
-
-            showInfo : function(row) {
-               $uibModal.open({
-                    controller: 'FormDetailController',
-                    templateUrl: 'views/formDetail.html',
-                    windowClass: 'app-modal-window',                   
-                    resolve: {
-                      selectedRow: function () {                    
-                          return row.entity;
-                      }
-                    }
-               });
-           
+        if (debug){
+            var formDefinition = {
+                    "showFormName":false,
+                    "formName":"Trade Disclosure",
+                    "formFields":[
+                        {
+                            "name":"Customer Name",
+                            "width":1,
+                            "alignment":"Overlay",
+                            "fieldNumber":1,
+                            "horizontal":319,
+                            "vertical":305
+                        },
+                        {
+                            "name":"Customer Address",
+                            "width":1,
+                            "alignment":"Overlay",
+                            "fieldNumber":2,
+                            "horizontal":323,
+                            "vertical":334
+                        },
+                        {
+                            "name":"Customer Date",
+                            "width":10,
+                            "alignment":"Left",
+                            "fieldNumber":3,
+                            "horizontal":930,
+                            "vertical":336
+                        },
+                        {
+                            "name":"Dealer Name",
+                            "width":1,
+                            "alignment":"Overlay",
+                            "fieldNumber":4,
+                            "horizontal":323,
+                            "vertical":368
+                        },
+                        {
+                            "name":"Dealer Address",
+                            "width":1,
+                            "alignment":"Overlay",
+                            "fieldNumber":5,
+                            "horizontal":322,
+                            "vertical":402
+                        },
+                        {
+                            "name":"Dealer Date",
+                            "width":10,
+                            "alignment":"Left",
+                            "fieldNumber":6,
+                            "horizontal":934,
+                            "vertical":399
+                        }
+                    ]
+                };
             }
-        }
 
-
-        var gridData = Data.getSearchMatches();;
-        $scope.resultsCount = gridData.length;
-        $scope.searchPattern = Data.getSearchPattern();
+        var data = formDefinition.formFields;
+        $scope.resultsCount = formDefinition.formFields.length;
+        $scope.formName = formDefinition.formName;
 
         $scope.gridOptions = {
             enableFiltering: false,
             enableSorting: false,
-            data: gridData,
-            enableRowSelection: true,
-            multiSelect: false,
-            enableRowHeaderSelection: false,
-            onRegisterApi: function(gridApi){ 
-                $scope.gridApi = gridApi;
-            },
-            appScopeProvider: $scope.myAppScopeProvider,
-            rowTemplate: "<div ng-dblclick=\"grid.appScope.showInfo(row)\" ng-repeat=\"(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name\" class=\"ui-grid-cell\" ng-class=\"{ 'ui-grid-row-header-cell': col.isRowHeader }\" ui-grid-cell></div>",
-            columnDefs: [
-                {
-                    name: 'account',
-                    displayName: $scope.prompts.gridColumnAccount,
-                    cellClass: 'grid-align-left',
-                    headerCellClass: 'grid-header-align-left',
-                    enableColumnMenu: false,
-                    width: '8%'
+            data: data,
+            columnDefs: [{
+                    name: 'fieldNumber',
+                    displayName: $scope.prompts.gridColumnFieldNumber,
+                    cellClass: 'grid-align-right',
+                    headerCellClass: 'grid-header-align-right',
+                    enableColumnMenu: false
                 },
                 {
-                    name: 'formID',
-                    displayName: $scope.prompts.gridColumnFormID,
+                    name: 'name',
+                    displayName: $scope.prompts.gridColumnName,
                     cellClass: 'grid-align-left',                    
-                    headerCellClass: 'grid-header-align-left',
-                    enableColumnMenu: false ,
-                    width: '10%'
+                    headerCellClass: 'grid-header-align-right',
+                    enableColumnMenu: false                    
                 },
                 {
-                    name: 'formName',
-                    displayName: $scope.prompts.gridColumnFormName,
-                    cellClass: 'grid-align-left',
-                    headerCellClass: 'grid-header-align-left',
+                    name: 'width',
+                    displayName: $scope.prompts.gridColumnWidth,
+                    cellClass: 'grid-align-right',
+                    headerCellClass: 'grid-header-align-right',
                     enableColumnMenu: false
                 },
                 { 
-                    name: 'date',
-                    displayName: $scope.prompts.gridColumnDate, 
+                    name: 'alignment',
+                    displayName: $scope.prompts.gridColumnAlignment, 
                     cellClass: 'grid-align-right',                    
                     headerCellClass: 'grid-header-align-right',
                     enableColumnMenu: false,
-                    width: '8%'                    
+
+                    editableCellTemplate: 'ui-grid/dropdownEditor',
+                    cellFilter: 'mapAlignment', 
+                    editDropdownValueLabel: 'alignment', 
+                    editDropdownOptionsArray: [
+                        { id: 'Left', alignment: 'Left' },
+                        { id: 'Right', alignment: 'Right' },
+                        { id: 'Overlay', alignment: 'Overlay' }
+                    ]
                 },
+
                 {
-                    name: 'description',
-                    displayName: $scope.prompts.gridColumnDescription,
-                    cellClass: 'grid-align-left',
-                    headerCellClass: 'grid-header-align-left',
+                    name: 'horizontal',
+                    displayName: $scope.prompts.gridColumnHorizontal,
+                    cellClass: 'grid-align-right',
+                    headerCellClass: 'grid-header-align-right',
                     enableColumnMenu: false                    
                 },
                 {
-                    name: 'comment',
-                    displayName: $scope.prompts.gridColumnComment,
-                    cellClass: 'grid-align-left',
-                    headerCellClass: 'grid-header-align-left',
+                    name: 'vertical',
+                    displayName: $scope.prompts.gridColumnVertical,
+                    cellClass: 'grid-align-right',
+                    headerCellClass: 'grid-header-align-right',
                     enableColumnMenu: false                    
                 },
                 {
-                    name: 'formFields',
-                    displayName: $scope.prompts.gridColumnComment,
-                    cellClass: 'grid-align-left',
-                    headerCellClass: 'grid-header-align-left',
-                    enableColumnMenu: false,
-                    visible: false                  
-                }                                
+                    name: 'action',
+                    displayName: $scope.prompts.gridColumnAction,
+                    cellTooltip: function(row, col) { return 'catsndogs'; },
+                    cellClass: 'grid-align-center',
+                    headerCellClass: 'grid-header-align-right',
+                    enableColumnMenu: false ,                                       
+                    cellTemplate: 'views/templates/gridColumnDelete.html'
+                }                
             ]
         };
-
-
-        $scope.searchGrid = function() {
-            console.log($scope.searchText);
-            $scope.gridOptions.data = $filter('filter')(gridData, $scope.searchText, undefined);
-            // gridDimensions = ListServices.getGridHeight($scope.gridOptions, $scope.gridApi);
-            // $scope.gridHeight = gridDimensions.gridHeight;
-            // $scope.moveUp = gridDimensions.moveUp;
-            // $scope.gridApi.grid.refresh();
-        };
-
 
     }
 ]);

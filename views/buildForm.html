@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <form name="formsBuilder" class="form-signin" ng-submit="saveFormDefinition()" novalidate>
+      <h4 class="alert alert-info">{{ prompts.pageTitle }}
+<!-- 
+      the pdf directive changes this to:
+      <div ng-mousedown="showPopup();">
+        <object data="blob:http:localhost....." 
+                type="application/pdf"
+                style="width: 100%; height: 100vh">
+        </object>
+      </div>
+ -->
+
+      <div ng-mousedown="showPopup($event)" oncontextmenu='return false'>        
+        <pdf src="{{fileAttributes.name}}" blob="{{fileAttributes.blob}}"></pdf>
+      </div>
+
+<!--       <button class="btn btn-lg btn-primary btn-block" 
+              style="position:relative; display: block;"
+              type="submit">
+              {{prompts.btnDone}}
+      </button>
+ -->
+    </form>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<nav class="navbar navbar-default sidebar" role="navigation">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+        <li class="active">
+        	<a href="">{{member.name_first}} {{member.name_last}}
+        		<span style="font-size:16px;" 
+        			  class="pull-right hidden-xs showopacity glyphicon glyphicon-user">
+        		</span>
+        	</a>
+        </li>
+
+        <li>
+          <input style="display: none;" id="chooseFile" type="file" name="files" filelist-bind>
+          <a href="" onclick="document.getElementById('chooseFile').click(); return false">
+            {{prompts.menuOpenFile}}
+            <span style="font-size:16px;"
+                  class="pull-right hidden-xs showopacity glyphicon glyphicon-folder-open icon-cart">
+            </span>
+          </a>
+        </li>        
+
+        <li ng-class="menuShowBuildForm()">
+          <a href="#/buildForm">{{prompts.menuBuildForm}}
+            <span style="font-size:16px;"
+                  class="pull-right hidden-xs showopacity glyphicon glyphicon-wrench icon-green">
+            </span>
+          </a>
+        </li>        
+
+        <li ng-class="menuShowDisplayForm()">
+          <a href="#/displayForm">{{prompts.menuDisplayForm}}
+            <span style="font-size:16px;"
+                  class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list icon-blue">
+            </span>
+          </a>
+        </li>
+
+        <li ng-class="menuShowUploadForm()">
+          <a href="#/uploadForm">{{prompts.menuUploadForm}}
+            <span style="font-size:16px;"
+                  class="pull-right hidden-xs showopacity glyphicon glyphicon-upload icon-cart">
+            </span>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
