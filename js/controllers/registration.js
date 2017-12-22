@@ -14,7 +14,12 @@ formsBuilder.controller('RegistrationController', ['$scope', '$http', '$location
 
         $scope.login = function() {
             member = $scope.member;
-            if (typeof(member) == 'undefined') member = guest ;
+            if (typeof(member) == 'undefined') {
+                member = {
+                    email: 'guest',
+                    password: 'guest'
+                }
+            }
 
             Data.validateCredentials(member).then(function(status) {
                 if (status.validated == 'success') {
