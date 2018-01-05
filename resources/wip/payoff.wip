@@ -2,10 +2,18 @@
     "formName": "Trade Disclosure",
     "formFields": [
         {
-            "name": "Customer Name",
+            "name": "zero-zero",
             "width": 1,
             "alignment": "Overlay",
             "fieldNumber": 1,
+            "horizontal": 559,
+            "vertical": 178
+        },
+        {
+            "name": "Customer Name",
+            "width": 1,
+            "alignment": "Overlay",
+            "fieldNumber": 2,
             "horizontal": 594,
             "vertical": 506
         },
@@ -13,7 +21,7 @@
             "name": "Customer Address",
             "width": 1,
             "alignment": "Overlay",
-            "fieldNumber": 2,
+            "fieldNumber": 3,
             "horizontal": 594,
             "vertical": 537
         },
@@ -21,7 +29,7 @@
             "name": "Customer Date",
             "width": 10,
             "alignment": "Left",
-            "fieldNumber": 3,
+            "fieldNumber": 4,
             "horizontal": 1198,
             "vertical": 537
         },
@@ -29,7 +37,7 @@
             "name": "Dealer Name",
             "width": 1,
             "alignment": "Overlay",
-            "fieldNumber": 4,
+            "fieldNumber": 5,
             "horizontal": 594,
             "vertical": 568
         },
@@ -37,7 +45,7 @@
             "name": "Dealer Address",
             "width": 1,
             "alignment": "Overlay",
-            "fieldNumber": 5,
+            "fieldNumber": 6,
             "horizontal": 594,
             "vertical": 598
         },
@@ -45,7 +53,7 @@
             "name": "Dealer Date",
             "width": 10,
             "alignment": "Left",
-            "fieldNumber": 6,
+            "fieldNumber": 7,
             "horizontal": 1198,
             "vertical": 598
         },
@@ -53,7 +61,7 @@
             "name": "Year",
             "width": 1,
             "alignment": "Overlay",
-            "fieldNumber": 7,
+            "fieldNumber": 8,
             "horizontal": 594,
             "vertical": 666
         },
@@ -61,7 +69,7 @@
             "name": "Make",
             "width": 1,
             "alignment": "Overlay",
-            "fieldNumber": 8,
+            "fieldNumber": 9,
             "horizontal": 680,
             "vertical": 666
         },
@@ -69,7 +77,7 @@
             "name": "Model",
             "width": 1,
             "alignment": "Overlay",
-            "fieldNumber": 9,
+            "fieldNumber": 10,
             "horizontal": 844,
             "vertical": 666
         },
@@ -77,7 +85,7 @@
             "name": "VIN",
             "width": 1,
             "alignment": "Overlay",
-            "fieldNumber": 10,
+            "fieldNumber": 11,
             "horizontal": 1011,
             "vertical": 666
         },
@@ -85,7 +93,7 @@
             "name": "Lienholder",
             "width": 1,
             "alignment": "Overlay",
-            "fieldNumber": 11,
+            "fieldNumber": 12,
             "horizontal": 656,
             "vertical": 730
         },
@@ -93,7 +101,7 @@
             "name": "Lien Amount",
             "width": 1,
             "alignment": "Overlay",
-            "fieldNumber": 12,
+            "fieldNumber": 13,
             "horizontal": 1144,
             "vertical": 770
         },
@@ -101,7 +109,7 @@
             "name": "Sign On Date",
             "width": 1,
             "alignment": "Overlay",
-            "fieldNumber": 13,
+            "fieldNumber": 14,
             "horizontal": 593,
             "vertical": 866
         },
@@ -109,7 +117,7 @@
             "name": "N/A Second Trade Signature",
             "width": 1,
             "alignment": "Overlay",
-            "fieldNumber": 14,
+            "fieldNumber": 15,
             "horizontal": 1144,
             "vertical": 866
         }

@@ -18,6 +18,11 @@ formsBuilder.controller('DisplayFormController', ['$scope', '$http', '$location'
             window.history.go(-1);
         };
 
+        $scope.positionFactor = function(offset,pixels){
+            var differential = pixels - offset;
+            var mm = (differential * 0.270212766).toFixed(0) ;
+            return pixels + '(' + mm + ')';
+        }
         var formDefinition = Data.getFormDefinition();
 
         if (debug){
@@ -128,14 +133,16 @@ formsBuilder.controller('DisplayFormController', ['$scope', '$http', '$location'
                     displayName: $scope.prompts.gridColumnHorizontal,
                     cellClass: 'grid-align-right',
                     headerCellClass: 'grid-header-align-right',
-                    enableColumnMenu: false                    
+                    enableColumnMenu: false,
+                    cellTemplate: 'views/templates/gridCalcHorizontal.html'
                 },
                 {
                     name: 'vertical',
                     displayName: $scope.prompts.gridColumnVertical,
                     cellClass: 'grid-align-right',
                     headerCellClass: 'grid-header-align-right',
-                    enableColumnMenu: false                    
+                    enableColumnMenu: false,
+                    cellTemplate: 'views/templates/gridCalcVertical.html'
                 },
                 {
                     name: 'action',
