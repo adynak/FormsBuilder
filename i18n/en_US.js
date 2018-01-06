@@ -23,6 +23,19 @@ var txtLogin = {
     registerPageTitle: 'Register for '
 };
 
+var txtSettings = {
+    dialogTitle: 'Configure Your PC',
+    horizontal: 'Horizontal',
+    selectHorizontal: "Monitor Horizontal Width in Inches:",
+    selectVertical: "Monitor Vertical Height in Inches:",
+    selectScale: "How Do You Want To See Coordinates?:",
+    placeholderSelect: 'Select',
+    vertical: 'Vertical',
+    resolution: 'Screen Resolution',
+    scale: 'Scale',
+    btnSubmit: "OK"
+};
+
 var txtNavigation = {
     brandName: 'Forms Builder',
     btnLogin: 'Login',
@@ -36,7 +49,8 @@ var txtSideMenu = {
     menuDisplayForm: 'Display Form Definition',
     menuUploadForm: 'Upload Form',
     menuBuildForm: 'Build Form',
-    menuOpenFile: 'Choose Form'
+    menuOpenFile: 'Choose Form',
+    menuSettings: 'Settings'
 };
 
 var txtProfile = {

@@ -389,3 +389,13 @@ body  {
     background-color: #f2f2f2;
     padding: 20px;
 }
+
+.selectHeight {
+    height: 34px;
+    width: 320px;
+}
+
+.selectPrompt {
+    margin: 5px 0px 0px 10px;
+    width: 300px;
+}

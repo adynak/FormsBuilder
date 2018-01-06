@@ -10,8 +10,26 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
             fileAttributes: {
                 name: null,
                 blob: null
+            },
+            formDefinition: {
+                showFormName: true,
+                formName: null,
+                formFields: []
             }
         };
+
+        var setScreenFactor = function(screenResolution){
+            var side1 = screenResolution.horizontal;
+            var side2 = screenResolution.vertical;
+            var diagonal = screenResolution.diagonal;
+            screenFactor = 25.4/(Math.sqrt((side1*side1+(side2*side2)))/diagonal);
+            console.log(screenFactor);
+            factoryVariables.screenFactor = screenFactor;
+        }
+
+        var getScreenFactor = function(){
+            return factoryVariables.screenFactor;
+        }
 
         var setFileAttributes = function(attrs){
             // {name: name, blob: blob ; }
@@ -23,11 +41,11 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
         }
 
         var setFormDefinition = function(formDefinition){
-            factoryVariables.FormDefinition = formDefinition;
+            factoryVariables.formDefinition = formDefinition;
         }
 
         var getFormDefinition = function(){
-            return factoryVariables.FormDefinition;
+            return factoryVariables.formDefinition;
         }
 
         var setIsNotLoggedIn = function(flag){
@@ -259,7 +277,9 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
             setSecurityInfo: setSecurityInfo,
             getSecurityInfo: getSecurityInfo,
             getWipForm: getWipForm,
-            setWipForm: setWipForm
+            setWipForm: setWipForm,
+            setScreenFactor: setScreenFactor,
+            getScreenFactor: getScreenFactor
         };
     }
 ]);

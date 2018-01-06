@@ -26,6 +26,31 @@ formsBuilder.factory("ListServices", ['$http', '$q', '$rootScope', 'Data',
             return widths;
         }
 
+        var buildFractionalMeasurements = function(start,stop){
+            var values = [];
+
+            for (var x = start; x < stop; ++x) {
+                values.push({
+                    name: new Fraction(x/16).toString(0),
+                    value: x / 16 
+                });
+            }
+
+            return values;
+        }
+
+        var buildScaleMeasurements = function(){
+            var scale = [
+                {
+                    name: 'MM'
+                },
+                {
+                    name: 'pixels'
+                }
+            ];
+            return scale;
+        }
+
         var renumberFields = function(formFields){
             for (var x = 0 ; x < formFields.length ; x++){
                 formFields[x].fieldNumber = x+1;
@@ -50,14 +75,10 @@ formsBuilder.factory("ListServices", ['$http', '$q', '$rootScope', 'Data',
             }
 
             if (menuItem == 'menuUploadForm'){
-                if (Data.getCurrentMember().member_type == 0){
+                if (Data.getFormDefinition().formName === null){
                     return 'disabled';
                 } else {
-                    if (Data.getFormDefinition().formName === null){
-                        return 'disabled';
-                    } else {
-                        return '';
-                    }
+                    return '';
                 }
             }
 
@@ -66,7 +87,9 @@ formsBuilder.factory("ListServices", ['$http', '$q', '$rootScope', 'Data',
         return {
             buildWidthSelect: buildWidthSelect,
             renumberFields:   renumberFields,
-            menuOptions:      menuOptions
+            menuOptions:      menuOptions,
+            buildFractionalMeasurements:  buildFractionalMeasurements,
+            buildScaleMeasurements: buildScaleMeasurements
         };
     }
 ]);

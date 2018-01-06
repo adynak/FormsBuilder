@@ -3,27 +3,34 @@ formsBuilder.controller('DisplayFormController', ['$scope', '$http', '$location'
 
         $scope.prompts = txtReviewForm;
 
-        var debug = false;
+        var formDefinition = Data.getFormDefinition();
+        var offsetHorizontal = formDefinition.formFields[0].horizontal;
+        var offsetVertical = formDefinition.formFields[0].vertical;
 
-        var memberInfo = {};
-        memberInfo.id = Data.getCurrentMember().id;
+        var debug = false;
 
         $scope.deleteRow = function(row){
             var index = $scope.gridOptions.data.indexOf(row.entity);
             $scope.gridOptions.data.splice(index,1);
             ListServices.renumberFields($scope.gridOptions.data);
-        };
+        };        
 
         $scope.btnDone = function(){
             window.history.go(-1);
         };
 
-        $scope.positionFactor = function(offset,pixels){
+        $scope.positionFactor = function(direction,pixels){
+            var offset;
+            if (direction == 'horizontal'){
+                offset = offsetHorizontal;
+            } else {
+                offset = offsetVertical;
+            }
+            var screenFactor = Data.getScreenFactor();
             var differential = pixels - offset;
-            var mm = (differential * 0.270212766).toFixed(0) ;
+            var mm = (differential * screenFactor).toFixed(0) ;
             return pixels + '(' + mm + ')';
         }
-        var formDefinition = Data.getFormDefinition();
 
         if (debug){
             var formDefinition = {

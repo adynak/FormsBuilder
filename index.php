@@ -21,15 +21,14 @@
     <script src="node_modules/angular-animate/angular-animate.min.js"></script>
     <script src="node_modules/angularjs-toaster/toaster.js"></script>
     <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script src="node_modules/fractional/releases/fraction-0.2.js"></script>
 
     <script src="js/app.js"></script>
     <script src="js/controllers/displayForm.js"></script>
     <script src="js/controllers/buildForm.js"></script>
     <script src="js/controllers/uploadForm.js"></script>
-    <script src="js/controllers/registration.js"></script>    
-    <script src="js/controllers/profile.js"></script>
     <script src="js/controllers/success.js"></script>
-    <script src="js/controllers/security.js"></script>
+    <script src="js/controllers/settings.js"></script>
     <script src="js/controllers/nav.js"></script>    
     <script src="js/factory/dataService.js"></script>
     <script src="js/factory/listService.js"></script>

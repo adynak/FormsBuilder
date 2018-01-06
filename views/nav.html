@@ -9,24 +9,5 @@
       </button >
       <a class="navbar-brand" href="#/success">{{ prompts.brandName }}</a>
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li class="" 
-            ng-hide="isnotloggedin" 
-            ng-controller="RegistrationController">
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="active">
-          <a ng-hide="authenticated" ng-href="#/login">{{prompts.btnLogin}}</a></li>
-        <li>
-          <a ng-hide="authenticated" ng-href="#/register">{{prompts.btnRegister}}</a></li>
-        <li>
-          <a ng-hide="isnotloggedin" 
-             ng-controller="RegistrationController" 
-             ng-href="#/login" 
-             ng-click="logout()">{{prompts.btnLogout}}</a></li>
-      </ul>
-    </div>
   </div>
 </nav>

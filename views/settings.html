@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <form name="myform" class="form-signin" novalidate="" ng-submit="saveConfig()">
+        <h4 class="text-info">{{prompts.dialogTitle}}</h4>
+        <p class="alert alert-danger" ng-show="invalidMessage">{{invalidMessage}}</p>
+
+        <div class="form-group">
+            <label for="horizontal" class="selectPrompt">{{prompts.selectHorizontal}}</label>
+            <br>
+            <select class="selectHeight" 
+                    ng-model="display.horizontal" 
+                    ng-required="true" 
+                    name="horizontal" 
+                    ng-options="(item.name) for item in listHorizontal track by item.value">
+                <option value="">{{ prompts.placeholderSelect }}</option>
+            </select>
+            <p class="text-danger" ng-show="historyForm.periodsRegular.$invalid && 
+                  historyForm.periodsRegular.$touched">ouch</p>
+        </div>
+
+        <div class="form-group">
+            <label for="vertical" class="selectPrompt">{{prompts.selectVertical}}</label>
+            <br>
+            <select class="selectHeight" 
+                    ng-model="display.vertical" 
+                    ng-required="true" 
+                    name="vertical" 
+                    data-ng-options="(item.name) for item in listVertical track by item.name">
+                <option value="">{{ prompts.placeholderSelect }}</option>
+            </select>
+            <p class="text-danger" ng-show="historyForm.periodsRegular.$invalid && 
+                  historyForm.periodsRegular.$touched">ouch</p>
+        </div>
+
+        <div class="form-group">
+            <label for="scale" class="selectPrompt">{{prompts.selectScale}}</label>
+            <br>
+            <select class="selectHeight" 
+                    data-ng-model="display.scale" 
+                    ng-required="true" 
+                    name="scale" 
+                    data-ng-options="(item.name) for item in listScale track by item.name">
+                <option value="">{{ prompts.placeholderSelect }}</option>
+            </select>
+            <p class="text-danger" ng-show="historyForm.periodsRegular.$invalid && 
+                  historyForm.periodsRegular.$touched">ouch</p>
+        </div>
+
+        <button type="submit" 
+                class="btn btn-lg btn-primary btn-block" 
+                ng-disabled="myform.$invalid">{{prompts.btnSubmit}}
+        </button>
+
+      <div class="clearfix"></div>
+
+      </form>
+    </div>
+  </div>
+</div>
