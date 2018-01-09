@@ -23,12 +23,19 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
             var side2 = screenResolution.vertical;
             var diagonal = screenResolution.diagonal;
             screenFactor = 25.4/(Math.sqrt((side1*side1+(side2*side2)))/diagonal);
-            console.log(screenFactor);
             factoryVariables.screenFactor = screenFactor;
         }
 
         var getScreenFactor = function(){
             return factoryVariables.screenFactor;
+        }
+
+        var setZoom = function(zoom){
+            factoryVariables.zoom = zoom;
+        }
+
+        var getZoom = function(){
+            return factoryVariables.zoom;
         }
 
         var setFileAttributes = function(attrs){
@@ -279,7 +286,9 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
             getWipForm: getWipForm,
             setWipForm: setWipForm,
             setScreenFactor: setScreenFactor,
-            getScreenFactor: getScreenFactor
+            getScreenFactor: getScreenFactor,
+            getZoom: getZoom,
+            setZoom: setZoom
         };
     }
 ]);

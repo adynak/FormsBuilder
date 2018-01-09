@@ -38,14 +38,16 @@ formsBuilder.directive("filelistBind", function(Data) {
     };
 });
 
-formsBuilder.directive('pdf', function() {
+formsBuilder.directive('pdf', function(Data) {
     return {
         restrict: 'E',
         link: function(scope, element, attrs) {
-            var url = attrs.src;
+            var zoomFactor = Data.getZoom();
+            var zoom = '?#zoom=' + zoomFactor;
+            var url = 'pdfForms/' + attrs.src + zoom;
             var blob = attrs.blob;
             element.replaceWith('<object id="pdfForm" type="application/pdf" data="' +
-                blob +
+                url +
                 '" style="width: 100%; height: 250vh"></object>');
         }
     };

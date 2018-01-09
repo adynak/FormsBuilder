@@ -6,7 +6,7 @@
             "width": 1,
             "alignment": "Overlay",
             "fieldNumber": 1,
-            "horizontal": 559,
+            "horizontal": 267,
             "vertical": 178
         },
         {
@@ -14,112 +14,80 @@
             "width": 1,
             "alignment": "Overlay",
             "fieldNumber": 2,
-            "horizontal": 594,
-            "vertical": 506
+            "horizontal": 299,
+            "vertical": 554
         },
         {
-            "name": "Customer Address",
+            "name": "ACSZ",
             "width": 1,
-            "alignment": "Overlay",
+            "alignment": "Right",
             "fieldNumber": 3,
-            "horizontal": 594,
-            "vertical": 537
+            "horizontal": 299,
+            "vertical": 593
         },
         {
-            "name": "Customer Date",
-            "width": 10,
+            "name": "date",
+            "width": 1,
             "alignment": "Left",
             "fieldNumber": 4,
-            "horizontal": 1198,
-            "vertical": 537
+            "horizontal": 1007,
+            "vertical": 593
         },
         {
             "name": "Dealer Name",
             "width": 1,
-            "alignment": "Overlay",
+            "alignment": "Right",
             "fieldNumber": 5,
-            "horizontal": 594,
-            "vertical": 568
+            "horizontal": 299,
+            "vertical": 632
         },
         {
-            "name": "Dealer Address",
+            "name": "DACSZ",
+            "width": 1,
+            "alignment": "Right",
+            "fieldNumber": 6,
+            "horizontal": 299,
+            "vertical": 664
+        },
+        {
+            "name": "ddate",
             "width": 1,
             "alignment": "Overlay",
-            "fieldNumber": 6,
-            "horizontal": 594,
-            "vertical": 598
-        },
-        {
-            "name": "Dealer Date",
-            "width": 10,
-            "alignment": "Left",
             "fieldNumber": 7,
-            "horizontal": 1198,
-            "vertical": 598
+            "horizontal": 1007,
+            "vertical": 664
         },
         {
-            "name": "Year",
+            "name": "year",
             "width": 1,
             "alignment": "Overlay",
             "fieldNumber": 8,
-            "horizontal": 594,
-            "vertical": 666
+            "horizontal": 299,
+            "vertical": 740
         },
         {
-            "name": "Make",
+            "name": "make",
             "width": 1,
             "alignment": "Overlay",
             "fieldNumber": 9,
-            "horizontal": 680,
-            "vertical": 666
+            "horizontal": 404,
+            "vertical": 740
         },
         {
-            "name": "Model",
+            "name": "model",
             "width": 1,
             "alignment": "Overlay",
             "fieldNumber": 10,
-            "horizontal": 844,
-            "vertical": 666
+            "horizontal": 585,
+            "vertical": 740
         },
         {
-            "name": "VIN",
+            "name": "vin",
             "width": 1,
             "alignment": "Overlay",
             "fieldNumber": 11,
-            "horizontal": 1011,
-            "vertical": 666
-        },
-        {
-            "name": "Lienholder",
-            "width": 1,
-            "alignment": "Overlay",
-            "fieldNumber": 12,
-            "horizontal": 656,
-            "vertical": 730
-        },
-        {
-            "name": "Lien Amount",
-            "width": 1,
-            "alignment": "Overlay",
-            "fieldNumber": 13,
-            "horizontal": 1144,
-            "vertical": 770
-        },
-        {
-            "name": "Sign On Date",
-            "width": 1,
-            "alignment": "Overlay",
-            "fieldNumber": 14,
-            "horizontal": 593,
-            "vertical": 866
-        },
-        {
-            "name": "N/A Second Trade Signature",
-            "width": 1,
-            "alignment": "Overlay",
-            "fieldNumber": 15,
-            "horizontal": 1144,
-            "vertical": 866
+            "horizontal": 774,
+            "vertical": 740
         }
     ]
 }

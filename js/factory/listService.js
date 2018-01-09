@@ -26,6 +26,20 @@ formsBuilder.factory("ListServices", ['$http', '$q', '$rootScope', 'Data',
             return widths;
         }
 
+        var buildZoomSelect = function() {
+            var zoom = [];
+
+            for (var x = 85; x < 120; ++x) {
+                zoom.push({
+                    name: x,
+                    id: x
+                });
+            }
+
+            return zoom;
+        }
+
+
         var buildFractionalMeasurements = function(start,stop){
             var values = [];
 
@@ -89,7 +103,8 @@ formsBuilder.factory("ListServices", ['$http', '$q', '$rootScope', 'Data',
             renumberFields:   renumberFields,
             menuOptions:      menuOptions,
             buildFractionalMeasurements:  buildFractionalMeasurements,
-            buildScaleMeasurements: buildScaleMeasurements
+            buildScaleMeasurements: buildScaleMeasurements,
+            buildZoomSelect: buildZoomSelect
         };
     }
 ]);

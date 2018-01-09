@@ -29,10 +29,12 @@ var txtSettings = {
     selectHorizontal: "Monitor Horizontal Width in Inches:",
     selectVertical: "Monitor Vertical Height in Inches:",
     selectScale: "How Do You Want To See Coordinates?:",
+    selectZoom: "What Zoom Percent Matches Your Document to Your Screen?:",
     placeholderSelect: 'Select',
     vertical: 'Vertical',
     resolution: 'Screen Resolution',
     scale: 'Scale',
+    zoom: 'Zoom',
     btnSubmit: "OK"
 };
 
