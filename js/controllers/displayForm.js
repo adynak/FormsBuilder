@@ -6,8 +6,9 @@ formsBuilder.controller('DisplayFormController', ['$scope', '$http', '$location'
         var formDefinition = Data.getFormDefinition();
         var offsetHorizontal = formDefinition.formFields[0].horizontal;
         var offsetVertical = formDefinition.formFields[0].vertical;
+        var scale = localStorage.getItem('FormsBuilderScale');
+        var screenFactor = Data.getScreenFactor();
 
-        var debug = false;
 
         $scope.deleteRow = function(row){
             var index = $scope.gridOptions.data.indexOf(row.entity);
@@ -20,74 +21,32 @@ formsBuilder.controller('DisplayFormController', ['$scope', '$http', '$location'
         };
 
         $scope.positionFactor = function(direction,pixels){
-            var offset;
+            // using factor to carry FormsBuilderUnit conversion multiplier
+            var offset, factor;
+            var mmToInches, distance;
             if (direction == 'horizontal'){
                 offset = offsetHorizontal;
+                factor = 120;
             } else {
                 offset = offsetVertical;
+                factor = 48;
             }
-            var screenFactor = Data.getScreenFactor();
-            var differential = pixels - offset;
-            var mm = (differential * screenFactor).toFixed(0) ;
-            return pixels + '(' + mm + ')';
-        }
 
-        if (debug){
-            var formDefinition = {
-                    "showFormName":false,
-                    "formName":"Trade Disclosure",
-                    "formFields":[
-                        {
-                            "name":"Customer Name",
-                            "width":1,
-                            "alignment":"Overlay",
-                            "fieldNumber":1,
-                            "horizontal":319,
-                            "vertical":305
-                        },
-                        {
-                            "name":"Customer Address",
-                            "width":1,
-                            "alignment":"Overlay",
-                            "fieldNumber":2,
-                            "horizontal":323,
-                            "vertical":334
-                        },
-                        {
-                            "name":"Customer Date",
-                            "width":10,
-                            "alignment":"Left",
-                            "fieldNumber":3,
-                            "horizontal":930,
-                            "vertical":336
-                        },
-                        {
-                            "name":"Dealer Name",
-                            "width":1,
-                            "alignment":"Overlay",
-                            "fieldNumber":4,
-                            "horizontal":323,
-                            "vertical":368
-                        },
-                        {
-                            "name":"Dealer Address",
-                            "width":1,
-                            "alignment":"Overlay",
-                            "fieldNumber":5,
-                            "horizontal":322,
-                            "vertical":402
-                        },
-                        {
-                            "name":"Dealer Date",
-                            "width":10,
-                            "alignment":"Left",
-                            "fieldNumber":6,
-                            "horizontal":934,
-                            "vertical":399
-                        }
-                    ]
-                };
-            }
+            return Data.buildDisplayUnit(scale, pixels, offset, factor, screenFactor);
+
+            // var screenFactor = Data.getScreenFactor();
+            // var differential = pixels - offset;
+            // var mm = differential * screenFactor ;
+
+            // if (true){
+            //     mmToInches = mm/25.4;
+            //     distance = Math.round(mmToInches * 16) / 16;
+            //     distance = new Fraction(distance);
+            // } else {
+            //     distance = mm.toFixed(0);
+            // }
+            // return pixels + '  (' + distance + ')';
+        }
 
         var data = formDefinition.formFields;
         $scope.resultsCount = formDefinition.formFields.length;
@@ -96,6 +55,7 @@ formsBuilder.controller('DisplayFormController', ['$scope', '$http', '$location'
         $scope.gridOptions = {
             enableFiltering: false,
             enableSorting: false,
+            minRowsToShow: 15,
             data: data,
             columnDefs: [{
                     name: 'fieldNumber',
@@ -154,7 +114,7 @@ formsBuilder.controller('DisplayFormController', ['$scope', '$http', '$location'
                 {
                     name: 'action',
                     displayName: $scope.prompts.gridColumnAction,
-                    cellTooltip: function(row, col) { return 'catsndogs'; },
+                    // cellTooltip: function(row, col) { return 'catsndogs'; },
                     cellClass: 'grid-align-center',
                     headerCellClass: 'grid-header-align-right',
                     enableColumnMenu: false ,                                       

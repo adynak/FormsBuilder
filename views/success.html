@@ -12,7 +12,7 @@
         	</a>
         </li>
 
-        <li>
+        <li ng-class="menuShowChooseForm()">
           <input style="display: none;" id="chooseFile" type="file" name="files" filelist-bind>
           <a href="" onclick="document.getElementById('chooseFile').click(); return false">
             {{prompts.menuOpenFile}}

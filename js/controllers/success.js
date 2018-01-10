@@ -15,6 +15,12 @@ formsBuilder.controller('SuccessController', ['$scope', '$http', '$location', 'D
             }
         }
 
+        Data.getLocalStorage();
+
+        $scope.menuShowChooseForm = function() {
+            return ListServices.menuOptions('menuChooseForm');
+        }
+
         $scope.menuShowBuildForm = function() {
             return ListServices.menuOptions('menuBuildForm');
         }

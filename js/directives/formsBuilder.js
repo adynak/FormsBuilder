@@ -26,9 +26,9 @@ formsBuilder.directive("filelistBind", function(Data) {
                     formFields: []
                 };
 
-                Data.getWipForm(fileAttributes).then(function(sampleForm) {
-                    if (sampleForm){
-                        Data.setFormDefinition(sampleForm);
+                Data.getWipForm(fileAttributes).then(function(wipForm) {
+                    if (wipForm){
+                        Data.setFormDefinition(wipForm);
                     } else {
                         Data.setFormDefinition(newForm);
                     }
@@ -48,7 +48,7 @@ formsBuilder.directive('pdf', function(Data) {
             var blob = attrs.blob;
             element.replaceWith('<object id="pdfForm" type="application/pdf" data="' +
                 url +
-                '" style="width: 100%; height: 250vh"></object>');
+                '" style="width: 100%; height: 1200px"></object>');
         }
     };
 });

@@ -2,13 +2,13 @@
   <div class="col-md-8 col-md-offset-2">
     <h4 class="alert alert-info">Form: {{ formName  }}
       <div style="text-align: right;   margin-top : -19px;">
-      <ng-pluralize count="resultsCount"
-        when="{'0':     '{{prompts.pluralsFields[0].tag}}',
-               '1':     '{} {{prompts.pluralsFields[1].tag}}',
-               'other': '{} {{prompts.pluralsFields[2].tag}}'
-              }">
-      </ng-pluralize>
-    </div>
+        <ng-pluralize count="resultsCount"
+          when="{'0':     '{{prompts.pluralsFields[0].tag}}',
+                 '1':     '{} {{prompts.pluralsFields[1].tag}}',
+                 'other': '{} {{prompts.pluralsFields[2].tag}}'
+                }">
+        </ng-pluralize>
+      </div>
 
     </h4>
     <br>
@@ -16,11 +16,13 @@
     <div>
       <div class="grid" 
            ui-grid-edit
-           ui-grid="gridOptions" ></div>
+           ui-grid="gridOptions" >
+      </div>
     </div>
     <br><br>
     <button class="btn btn-lg btn-primary btn-block" 
-            type="button" ng-click="btnDone();">{{prompts.btnCancel}}
+            type="button" 
+            ng-click="btnDone();">{{prompts.btnCancel}}
     </button>
   </div>
 </div>

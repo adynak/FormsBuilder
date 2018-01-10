@@ -43,10 +43,9 @@
 					<select 
 						ng-model="fieldDefinition.width"
 						id="fieldWidth"
-						ng-options="width.id as width.name for width in selectWidth"
+						ng-options="width.id as width.name for width in selectWidth track by width.name"
 						ng-change="changing()">
 						<option value="">{{ prompts.placeholderFieldWidth }}</option>
-
 					</select>
 				</div>
 			</div>
@@ -57,7 +56,8 @@
 					<select 
 						ng-model="fieldDefinition.alignment"
 						id="fiendAlignment"
-                  		ng-options="alignments.id as alignments.name for alignments in prompts.alignments">
+                  		ng-options="alignments.id as alignments.name for alignments in prompts.alignments track 
+                  		by alignments.name">
 						<option value="">{{ prompts.placeholderFieldAlignment }}</option>
 
 					</select>

@@ -55,6 +55,12 @@ var txtSideMenu = {
     menuSettings: 'Settings'
 };
 
+var txtUploadForm = {
+    pageTitle: 'Press Upload To Save This Form To The Server',
+    btnUpload: 'Upload',
+    btnBack: 'Back'
+}
+
 var txtProfile = {
     pageTitle: 'Update Your Profile',
     onlineID: 'OnlineID',

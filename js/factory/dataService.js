@@ -18,6 +18,63 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
             }
         };
 
+        var buildDisplayUnit = function(scale, pixels, offset, factor, screenFactor,jsonFlag){
+            var differential, mm, distance, mmToInches;
+            differential = pixels - offset;
+            mm = differential * screenFactor ;
+
+            switch(scale){
+                case 'MM':
+                    distance = mm.toFixed(0);
+                    displayUnit = pixels + ' (' + distance + ')';
+                break;
+
+                case "inches":
+                    mmToInches = mm/25.4;
+                    // to nearest 1/16th inch
+                    distance = Math.round(mmToInches * 16) / 16;
+                    distance = new Fraction(distance);
+                    displayUnit = pixels + ' (' + distance + ')';
+                break;
+
+                case "FBU":
+                    mmToInches = mm/25.4;
+                    distance = (mmToInches * factor).toFixed(0);
+                    displayUnit = pixels + ' (' + distance + ')';
+                break;
+
+
+                case "pixels":
+                    distance = pixels;
+                    displayUnit = distance;
+                break;
+            }
+            if (jsonFlag === true){
+                return distance;
+            } else {
+                return displayUnit;
+            }
+        };
+
+        var getLocalStorage = function(){
+            var previousHorizontal = localStorage.getItem('FormsBuilderWidth');
+            var previousVertical   = localStorage.getItem('FormsBuilderHeight');
+            var previousScale      = localStorage.getItem('FormsBuilderScale');
+            var previousZoom       = localStorage.getItem('FormsBuilderZoom');
+            if (previousZoom !== null || previousVertical !== null){
+                var diagonal = Math.sqrt(Math.pow(previousHorizontal, 2) + 
+                               Math.pow(previousVertical, 2));
+
+                var screenResolution = {
+                    horizontal: window.screen.width,
+                    vertical: window.screen.height,
+                    diagonal: diagonal
+                }
+                setScreenFactor(screenResolution);
+                setZoom(previousZoom);
+            }
+        }
+
         var setScreenFactor = function(screenResolution){
             var side1 = screenResolution.horizontal;
             var side2 = screenResolution.vertical;
@@ -45,6 +102,19 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
 
         var getFileAttributes = function(){
             return factoryVariables.fileAttributes;
+        }
+
+        var purgeOldFormSettings = function(formDefinition){
+            // get rid of any MM, inches, FBU elements in the form
+            var formFieldCount = formDefinition.formFields.length;
+            for (var fX = 0 ; fX < formFieldCount; fX++){
+                delete formDefinition.formFields[fX].FBU;
+                delete formDefinition.formFields[fX].verticalMM;
+                delete formDefinition.formFields[fX].horizontalMM;
+                delete formDefinition.formFields[fX].verticalInches;
+                delete formDefinition.formFields[fX].horizontalInches;
+            }
+            return formDefinition;
         }
 
         var setFormDefinition = function(formDefinition){
@@ -288,7 +358,10 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
             setScreenFactor: setScreenFactor,
             getScreenFactor: getScreenFactor,
             getZoom: getZoom,
-            setZoom: setZoom
+            setZoom: setZoom,
+            getLocalStorage: getLocalStorage,
+            buildDisplayUnit: buildDisplayUnit,
+            purgeOldFormSettings: purgeOldFormSettings
         };
     }
 ]);

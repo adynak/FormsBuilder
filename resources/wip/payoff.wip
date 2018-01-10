@@ -6,88 +6,130 @@
             "width": 1,
             "alignment": "Overlay",
             "fieldNumber": 1,
+            "vertical": 178,
             "horizontal": 267,
-            "vertical": 178
+            "verticalMM": "0",
+            "horizontalMM": "0"
         },
         {
             "name": "Customer Name",
             "width": 1,
             "alignment": "Overlay",
             "fieldNumber": 2,
+            "vertical": 554,
             "horizontal": 299,
-            "vertical": 554
+            "verticalMM": "87",
+            "horizontalMM": "7"
         },
         {
             "name": "ACSZ",
             "width": 1,
             "alignment": "Right",
             "fieldNumber": 3,
+            "vertical": 593,
             "horizontal": 299,
-            "vertical": 593
+            "verticalMM": "96",
+            "horizontalMM": "7"
         },
         {
             "name": "date",
             "width": 1,
             "alignment": "Left",
             "fieldNumber": 4,
+            "vertical": 593,
             "horizontal": 1007,
-            "vertical": 593
+            "verticalMM": "96",
+            "horizontalMM": "171"
         },
         {
             "name": "Dealer Name",
             "width": 1,
             "alignment": "Right",
             "fieldNumber": 5,
+            "vertical": 632,
             "horizontal": 299,
-            "vertical": 632
+            "verticalMM": "105",
+            "horizontalMM": "7"
         },
         {
             "name": "DACSZ",
             "width": 1,
             "alignment": "Right",
             "fieldNumber": 6,
+            "vertical": 664,
             "horizontal": 299,
-            "vertical": 664
+            "verticalMM": "112",
+            "horizontalMM": "7"
         },
         {
             "name": "ddate",
             "width": 1,
             "alignment": "Overlay",
             "fieldNumber": 7,
+            "vertical": 664,
             "horizontal": 1007,
-            "vertical": 664
+            "verticalMM": "112",
+            "horizontalMM": "171"
         },
         {
             "name": "year",
             "width": 1,
             "alignment": "Overlay",
             "fieldNumber": 8,
+            "vertical": 740,
             "horizontal": 299,
-            "vertical": 740
+            "verticalMM": "130",
+            "horizontalMM": "7"
         },
         {
             "name": "make",
             "width": 1,
             "alignment": "Overlay",
             "fieldNumber": 9,
+            "vertical": 740,
             "horizontal": 404,
-            "vertical": 740
+            "verticalMM": "130",
+            "horizontalMM": "32"
         },
         {
             "name": "model",
             "width": 1,
             "alignment": "Overlay",
             "fieldNumber": 10,
+            "vertical": 740,
             "horizontal": 585,
-            "vertical": 740
+            "verticalMM": "130",
+            "horizontalMM": "73"
         },
         {
             "name": "vin",
             "width": 1,
             "alignment": "Overlay",
             "fieldNumber": 11,
+            "vertical": 740,
             "horizontal": 774,
-            "vertical": 740
+            "verticalMM": "130",
+            "horizontalMM": "117"
+        },
+        {
+            "name": "Lien Payoff",
+            "width": "1",
+            "alignment": "Left",
+            "fieldNumber": 12,
+            "vertical": 865,
+            "horizontal": 941,
+            "verticalMM": "158",
+            "horizontalMM": "155"
+        },
+        {
+            "name": "Sign on date",
+            "width": "1",
+            "alignment": "Left",
+            "fieldNumber": 13,
+            "vertical": 969,
+            "horizontal": 300,
+            "verticalMM": "182",
+            "horizontalMM": "8"
         }
     ]
 }

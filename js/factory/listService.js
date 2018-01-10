@@ -29,7 +29,7 @@ formsBuilder.factory("ListServices", ['$http', '$q', '$rootScope', 'Data',
         var buildZoomSelect = function() {
             var zoom = [];
 
-            for (var x = 85; x < 120; ++x) {
+            for (var x = 85; x < 200; ++x) {
                 zoom.push({
                     name: x,
                     id: x
@@ -59,6 +59,12 @@ formsBuilder.factory("ListServices", ['$http', '$q', '$rootScope', 'Data',
                     name: 'MM'
                 },
                 {
+                    name: 'inches'
+                },
+                {
+                    name: 'FBU'
+                },
+                {
                     name: 'pixels'
                 }
             ];
@@ -72,6 +78,15 @@ formsBuilder.factory("ListServices", ['$http', '$q', '$rootScope', 'Data',
         }
 
         var menuOptions = function(menuItem) {
+
+            if (menuItem == 'menuChooseForm'){
+                if (typeof(Data.getScreenFactor()) === 'undefined'){
+                    return 'disabled';
+                } else {
+                    return '';
+                }
+            }
+
             if (menuItem == 'menuBuildForm'){
                 if (Data.getFileAttributes().name === null){
                     return 'disabled';

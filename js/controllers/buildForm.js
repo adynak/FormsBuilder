@@ -1,5 +1,5 @@
-formsBuilder.controller('BuildFormController', ['$scope', 'ListServices', '$uibModal', 'Data', 'MarkerServices',
-    function($scope, ListServices, $uibModal, Data, MarkerServices) {
+formsBuilder.controller('BuildFormController', ['$scope', 'ListServices', '$uibModal', 'Data', 'MarkerServices', '$window',
+    function($scope, ListServices, $uibModal, Data, MarkerServices, $window) {
 
         var fieldNumber = 1;
         $scope.prompts = txtCommon;
@@ -44,7 +44,7 @@ formsBuilder.controller('BuildFormController', ['$scope', 'ListServices', '$uibM
             }
 
             vector.horizontal = event.clientX;
-            vector.vertical   = event.clientY;
+            vector.vertical   = event.clientY + $window.scrollY;
             vector.spotID     = 'spot' + fieldNumber;
 
             MarkerServices.addSpot(vector);
@@ -65,7 +65,11 @@ formsBuilder.controller('BuildFormController', ['$scope', 'ListServices', '$uibM
                 }
             }).result.then(function(result) {
                 // OK - save the field definition
-                fieldNumber ++
+                fieldNumber ++;
+                // these are defaulted and tracked by an object which we don't want in the decinition
+                result.width = result.width.name;
+                result.alignment = result.alignment.name;
+
                 formDefinition.formFields.push(result);
                 formDefinition.showFormName = false;
                 var sortedFormFields = _.sortBy(formDefinition.formFields, ["vertical", "horizontal"]);
@@ -90,7 +94,6 @@ var saveOrCancelController = function($scope, $uibModalInstance, $http, formDefi
         var sortedFormFields = _.sortBy(formDefinition.formFields, ["vertical", "horizontal"]);
         formDefinition.formFields = sortedFormFields;
         ListServices.renumberFields(formDefinition.formFields);
-        Data.setFormDefinition(formDefinition);
 
         // remove the spots
         MarkerServices.wipeSpots(formDefinition);
@@ -143,8 +146,14 @@ var defineFieldsController = function($scope, $uibModalInstance, $http, formDefi
     $scope.fieldNumber     = fieldNumber;
     $scope.fieldDefinition = { 
                                 name:'',
-                                width:'',
-                                alignment:'',
+                                width:{
+                                    name: '1',
+                                    id: '1'
+                                },
+                                alignment: {
+                                    name: 'Left',
+                                    id: 'Left'
+                                },
                                 fieldNumber: fieldNumber,
                                 horizontal: vector.horizontal,
                                 vertical: vector.vertical
@@ -160,8 +169,8 @@ var defineFieldsController = function($scope, $uibModalInstance, $http, formDefi
 
     $scope.checkInputs = function(){
         if ($scope.fieldDefinition.name.length > 0 &&
-            $scope.fieldDefinition.width >= 0 && 
-            $scope.fieldDefinition.alignment.length > 0){
+            $scope.fieldDefinition.width.name >= 0 && 
+            $scope.fieldDefinition.alignment.name.length > 0){
             return false;
         } else {
             return true;
