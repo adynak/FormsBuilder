@@ -18,7 +18,7 @@ formsBuilder.directive("filelistBind", function(Data) {
         elm.bind("change", function(evt) {
             scope.$apply(function(scope) {
                 fileAttributes.name = evt.target.files[0].name;
-                fileAttributes.blob = URL.createObjectURL(event.target.files[0]);
+                fileAttributes.blob = URL.createObjectURL(evt.target.files[0]);
                 Data.setFileAttributes(fileAttributes);
                 var newForm = {
                     showFormName: true,
