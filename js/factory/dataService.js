@@ -29,6 +29,11 @@ formsBuilder.factory("Data", ['$http', '$q', '$rootScope',
                     displayUnit = pixels + ' (' + distance + ')';
                 break;
 
+                case 'CM':
+                    distance = (mm/10).toFixed(1);
+                    displayUnit = pixels + ' (' + distance + ')';
+                break;                
+
                 case "inches":
                     mmToInches = mm/25.4;
                     // to nearest 1/16th inch

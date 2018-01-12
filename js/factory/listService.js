@@ -59,6 +59,9 @@ formsBuilder.factory("ListServices", ['$http', '$q', '$rootScope', 'Data',
                     name: 'MM'
                 },
                 {
+                    name: 'CM'
+                },
+                {
                     name: 'inches'
                 },
                 {
