@@ -62,6 +62,8 @@
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="node_modules/angular-touch/angular-touch.js"></script> 
     <script src="node_modules/angular-ui-grid/ui-grid.min.js"></script> 
+    <script src="node_modules/pdfmake/build/pdfmake.min.js"></script> 
+    <script src="node_modules/pdfmake/build/vfs_fonts.js"></script> 
     
     <link rel="stylesheet" href="node_modules/angular-ui-grid/ui-grid.min.css"</link>
 

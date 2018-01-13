@@ -1,5 +1,6 @@
 var formsBuilder = angular.module('formsBuilder', ['ngRoute', 'ngAnimate', 'toaster', 'ngTouch', 
-                                     'ui.grid', 'ui.grid.edit', 'ngMessages', 'ui.grid.grouping', 'ui.bootstrap']);
+                                     'ui.grid', 'ui.grid.edit', 'ngMessages', 'ui.grid.grouping', 'ui.bootstrap',
+                                     'ui.grid.exporter']);
 
 formsBuilder.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     

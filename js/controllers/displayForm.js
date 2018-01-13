@@ -57,6 +57,18 @@ formsBuilder.controller('DisplayFormController', ['$scope', '$http', '$location'
             enableSorting: false,
             minRowsToShow: 15,
             data: data,
+            enableGridMenu: true,
+            exporterPdfHeader: { 
+                text: formDefinition.formName, 
+                style: 'headerStyle' },
+            exporterPdfFooter: function ( currentPage, pageCount ) {
+                return { text: currentPage.toString() + ' / ' + pageCount.toString(), style: 'footerStyle' };
+            },
+            exporterPdfCustomFormatter: function ( docDefinition ) {
+                docDefinition.styles.headerStyle = { fontSize: 16, bold: true , margin: [40,10,0,0]};
+                docDefinition.styles.footerStyle = { fontSize: 10, bold: true , margin: [20,0,0,0] };
+                return docDefinition;
+            },            
             columnDefs: [{
                     name: 'fieldNumber',
                     displayName: $scope.prompts.gridColumnFieldNumber,
