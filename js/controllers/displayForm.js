@@ -9,6 +9,9 @@ formsBuilder.controller('DisplayFormController', ['$scope', '$http', '$location'
         var scale = localStorage.getItem('FormsBuilderScale');
         var screenFactor = Data.getScreenFactor();
 
+        $scope.prompts.gridColumnUserHorizontal = txtReviewForm.gridColumnHorizontal + ' ' + scale;
+        $scope.prompts.gridColumnUserVertical   = txtReviewForm.gridColumnVertical + ' ' + scale;
+        $scope.showAction = true;
 
         $scope.deleteRow = function(row){
             var index = $scope.gridOptions.data.indexOf(row.entity);
@@ -20,19 +23,30 @@ formsBuilder.controller('DisplayFormController', ['$scope', '$http', '$location'
             window.history.go(-1);
         };
 
-        $scope.positionFactor = function(direction,pixels){
+        $scope.positionFactor = function(direction,row){
             // using factor to carry FormsBuilderUnit conversion multiplier
             var offset, factor;
             var mmToInches, distance;
             if (direction == 'horizontal'){
                 offset = offsetHorizontal;
                 factor = 120;
+                pixels = row.horizontal;
             } else {
                 offset = offsetVertical;
                 factor = 48;
+                pixels = row.vertical;
             }
 
-            return Data.buildDisplayUnit(scale, pixels, offset, factor, screenFactor);
+            var index = row.fieldNumber-1;
+
+            var displayUnit = Data.buildDisplayUnit(scale, pixels, offset, factor, screenFactor, true);
+            if (direction == 'horizontal'){
+                formDefinition.formFields[index].userHorizontal = displayUnit;
+            } else {
+                formDefinition.formFields[index].userVertical   = displayUnit;
+            }
+
+            return Data.buildDisplayUnit(scale, pixels, offset, factor, screenFactor, true);
 
             // var screenFactor = Data.getScreenFactor();
             // var differential = pixels - offset;
@@ -66,7 +80,7 @@ formsBuilder.controller('DisplayFormController', ['$scope', '$http', '$location'
             },
             exporterPdfCustomFormatter: function ( docDefinition ) {
                 docDefinition.styles.headerStyle = { fontSize: 16, bold: true , margin: [40,10,0,0]};
-                docDefinition.styles.footerStyle = { fontSize: 10, bold: true , margin: [20,0,0,0] };
+                docDefinition.styles.footerStyle = { fontSize: 10, bold: true , margin: [20,0,0,0] };                
                 return docDefinition;
             },            
             columnDefs: [{
@@ -88,7 +102,8 @@ formsBuilder.controller('DisplayFormController', ['$scope', '$http', '$location'
                     displayName: $scope.prompts.gridColumnWidth,
                     cellClass: 'grid-align-right',
                     headerCellClass: 'grid-header-align-right',
-                    enableColumnMenu: false
+                    enableColumnMenu: false,
+                    visible: false
                 },
                 { 
                     name: 'alignment',
@@ -96,7 +111,7 @@ formsBuilder.controller('DisplayFormController', ['$scope', '$http', '$location'
                     cellClass: 'grid-align-right',                    
                     headerCellClass: 'grid-header-align-right',
                     enableColumnMenu: false,
-
+                    visible: false,
                     editableCellTemplate: 'ui-grid/dropdownEditor',
                     cellFilter: 'mapAlignment', 
                     editDropdownValueLabel: 'alignment', 
@@ -106,14 +121,13 @@ formsBuilder.controller('DisplayFormController', ['$scope', '$http', '$location'
                         { id: 'Overlay', alignment: 'Overlay' }
                     ]
                 },
-
                 {
                     name: 'horizontal',
                     displayName: $scope.prompts.gridColumnHorizontal,
                     cellClass: 'grid-align-right',
                     headerCellClass: 'grid-header-align-right',
                     enableColumnMenu: false,
-                    cellTemplate: 'views/templates/gridCalcHorizontal.html'
+                    // cellTemplate: 'views/templates/gridCalcHorizontal.html'
                 },
                 {
                     name: 'vertical',
@@ -121,8 +135,26 @@ formsBuilder.controller('DisplayFormController', ['$scope', '$http', '$location'
                     cellClass: 'grid-align-right',
                     headerCellClass: 'grid-header-align-right',
                     enableColumnMenu: false,
-                    cellTemplate: 'views/templates/gridCalcVertical.html'
+                    // cellTemplate: 'views/templates/gridCalcVertical.html'
                 },
+                {
+                    name: 'userHorizontal',
+                    displayName: $scope.prompts.gridColumnUserHorizontal,
+                    cellClass: 'grid-align-right',
+                    headerCellClass: 'grid-header-align-right',
+                    enableColumnMenu: false,
+                    cellTemplate: 'views/templates/gridCalcHorizontal.html',
+                    enableCellEdit: false
+                },
+                {
+                    name: 'userVertical',
+                    displayName: $scope.prompts.gridColumnUserVertical,
+                    cellClass: 'grid-align-right',
+                    headerCellClass: 'grid-header-align-right',
+                    enableColumnMenu: false,
+                    cellTemplate: 'views/templates/gridCalcVertical.html',
+                    enableCellEdit: false                    
+                },                
                 {
                     name: 'action',
                     displayName: $scope.prompts.gridColumnAction,
@@ -130,7 +162,8 @@ formsBuilder.controller('DisplayFormController', ['$scope', '$http', '$location'
                     cellClass: 'grid-align-center',
                     headerCellClass: 'grid-header-align-right',
                     enableColumnMenu: false ,                                       
-                    cellTemplate: 'views/templates/gridColumnDelete.html'
+                    cellTemplate: 'views/templates/gridColumnDelete.html',
+                    visible: $scope.showAction
                 }                
             ]
         };
