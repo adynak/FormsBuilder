@@ -82,7 +82,8 @@ formsBuilder.controller('DisplayFormController', ['$scope', '$http', '$location'
                 docDefinition.styles.headerStyle = { fontSize: 16, bold: true , margin: [40,10,0,0]};
                 docDefinition.styles.footerStyle = { fontSize: 10, bold: true , margin: [20,0,0,0] };                
                 return docDefinition;
-            },            
+            },
+            exporterSuppressColumns: ['action'] ,           
             columnDefs: [{
                     name: 'fieldNumber',
                     displayName: $scope.prompts.gridColumnFieldNumber,
