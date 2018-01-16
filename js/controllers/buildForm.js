@@ -46,7 +46,6 @@ formsBuilder.controller('BuildFormController', ['$scope', 'ListServices', '$uibM
             vector.horizontal = event.clientX;
             vector.vertical   = event.clientY + $window.scrollY;
             vector.spotID     = 'spot' + fieldNumber;
-
             MarkerServices.addSpot(vector);
 
             $uibModal.open({
@@ -139,27 +138,45 @@ var saveOrCancelController = function($scope, $uibModalInstance, $http, formDefi
 
 };
 
-var defineFieldsController = function($scope, $uibModalInstance, $http, formDefinition, ListServices, fieldNumber, vector) {
-    $scope.prompts         = txtPrompts;
-    $scope.selectWidth     = ListServices.buildWidthSelect();
-    $scope.formDefinition  = formDefinition;
-    $scope.fieldNumber     = fieldNumber;
-    $scope.fieldDefinition = { 
-                                name:'',
-                                width:{
-                                    name: '1',
-                                    id: '1'
-                                },
-                                alignment: {
-                                    name: 'Left',
-                                    id: 'Left'
-                                },
-                                fieldNumber: fieldNumber,
-                                horizontal: vector.horizontal,
-                                vertical: vector.vertical
-                            };
+var defineFieldsController = function($scope, $uibModalInstance, $http, formDefinition, 
+                                      ListServices, fieldNumber, vector, $window, MarkerServices) {
+    $scope.prompts           = txtPrompts;
+    $scope.selectWidth       = ListServices.buildWidthSelect();
+    $scope.selectAlignment   = ListServices.buildAlignmentSelect();
+    $scope.formDefinition    = formDefinition;
+    $scope.fieldNumber       = fieldNumber;
+    $scope.selectedWidth     = { name: '1', id: '1' };
+    $scope.selectedAlignment = { name: 'Left', id: 'Left' };
+    $scope.fieldDefinition   = { 
+                                    name:'',
+                                    width:{
+                                        name: '1',
+                                        id: '1'
+                                    },
+                                    alignment: {
+                                        name: 'Left',
+                                        id: 'Left'
+                                    },
+                                    fieldNumber: fieldNumber,
+                                    horizontal: vector.horizontal,
+                                    vertical: vector.vertical
+                                };
 
     $scope.ok = function() {
+        if ($scope.selectedAlignment.name == 'Left'){
+            vector.horizontal = vector.horizontal + ($scope.selectedWidth.name*10);
+            vector.spotID     = 'spot' + fieldNumber + 'R';
+        }
+        if ($scope.selectedAlignment.name == 'Right'){
+            vector.horizontal = vector.horizontal - ($scope.selectedWidth.name*10);
+            vector.spotID     = 'spot' + fieldNumber + 'L';
+        }
+        if ($scope.selectedAlignment == 'Overlay'){
+            null
+        } else {
+            MarkerServices.addSpot(vector);
+        }
+
         $uibModalInstance.close($scope.fieldDefinition);
     };
 

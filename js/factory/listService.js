@@ -14,47 +14,61 @@ formsBuilder.factory("ListServices", ['$http', '$q', '$rootScope', 'Data',
         }
 
         var buildWidthSelect = function() {
-            var widths = [];
+            var items = [];
 
             for (var x = 0; x < 30; ++x) {
-                widths.push({
+                items.push({
                     name: x,
                     id: x
                 });
             }
 
-            return widths;
+            return items;
         }
 
+
+        var buildAlignmentSelect = function() {
+            var items = [];
+            var alignmentCount = txtPrompts.alignments.length;
+
+            for (var x = 0; x < alignmentCount; ++x) {
+                items.push({
+                    name: txtPrompts.alignments[x].name,
+                    id: txtPrompts.alignments[x].id
+                });
+            }
+            return items;
+        }            
+
         var buildZoomSelect = function() {
-            var zoom = [];
+            var items = [];
 
             for (var x = 85; x < 200; ++x) {
-                zoom.push({
+                items.push({
                     name: x,
                     id: x
                 });
             }
 
-            return zoom;
+            return items;
         }
 
 
         var buildFractionalMeasurements = function(start,stop){
-            var values = [];
+            var items = [];
 
             for (var x = start; x < stop; ++x) {
-                values.push({
+                items.push({
                     name: new Fraction(x/16).toString(0),
                     value: x / 16 
                 });
             }
 
-            return values;
+            return items;
         }
 
         var buildScaleMeasurements = function(){
-            var scale = [
+            var items = [
                 {
                     name: 'MM'
                 },
@@ -71,7 +85,7 @@ formsBuilder.factory("ListServices", ['$http', '$q', '$rootScope', 'Data',
                     name: 'pixels'
                 }
             ];
-            return scale;
+            return items;
         }
 
         var renumberFields = function(formFields){
@@ -122,7 +136,8 @@ formsBuilder.factory("ListServices", ['$http', '$q', '$rootScope', 'Data',
             menuOptions:      menuOptions,
             buildFractionalMeasurements:  buildFractionalMeasurements,
             buildScaleMeasurements: buildScaleMeasurements,
-            buildZoomSelect: buildZoomSelect
+            buildZoomSelect: buildZoomSelect,
+            buildAlignmentSelect: buildAlignmentSelect
         };
     }
 ]);
