@@ -145,18 +145,12 @@ var defineFieldsController = function($scope, $uibModalInstance, $http, formDefi
     $scope.selectAlignment   = ListServices.buildAlignmentSelect();
     $scope.formDefinition    = formDefinition;
     $scope.fieldNumber       = fieldNumber;
-    $scope.selectedWidth     = { name: '1', id: '1' };
-    $scope.selectedAlignment = { name: 'Left', id: 'Left' };
-    $scope.fieldDefinition   = { 
+    $scope.selectedWidth     = {name: '1', id: '1' };
+    $scope.selectedAlignment = {name: 'Left', id: 'Left' };
+    $scope.fieldDefinition   = {
                                     name:'',
-                                    width:{
-                                        name: '1',
-                                        id: '1'
-                                    },
-                                    alignment: {
-                                        name: 'Left',
-                                        id: 'Left'
-                                    },
+                                    width:{name: '1',id: '1'},
+                                    alignment: {name: 'Left',id: 'Left'},
                                     fieldNumber: fieldNumber,
                                     horizontal: vector.horizontal,
                                     vertical: vector.vertical

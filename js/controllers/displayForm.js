@@ -169,5 +169,25 @@ formsBuilder.controller('DisplayFormController', ['$scope', '$http', '$location'
             ]
         };
 
+        $scope.gridOptions.onRegisterApi = function(gridApi){
+          //set gridApi on scope
+          $scope.gridApi = gridApi;
+          gridApi.edit.on.afterCellEdit($scope,function(rowEntity, colDef, newValue, oldValue){
+            console.log(newValue);
+            if ((colDef.name == 'horizontal' || colDef.name == 'vertical') && (newValue.charAt(0).toUpperCase() == 'F' )){
+                var editCell = 'edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue ;
+
+                var followField = newValue.slice( 1 );
+                console.log(formDefinition.formFields, followField);
+                var obj = _.find(formDefinition.formFields, function(el) {
+                  return el.fieldNumber == followField;
+                });
+                var followValue = _.get(obj, colDef.name);
+
+            }
+            $scope.$apply();
+          });
+        };
+
     }
 ]);
